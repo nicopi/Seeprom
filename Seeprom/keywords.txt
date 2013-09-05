@@ -1,0 +1,20 @@
+#######################################
+# Syntax Coloring Map For Seeprom
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Seeprom	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+step	KEYWORD2
+writeByte	KEYWORD2
+writePage	KEYWORD2
+readByte	KEYWORD2
+readBuffer	KEYWORD2
+dump	KEYWORD2
