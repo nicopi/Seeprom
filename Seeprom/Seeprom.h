@@ -22,8 +22,8 @@
 #ifndef Seeprom_h
 #define Seeprom_h
 
-#include "Arduino.h"
-#include "Wire.h"
+#include <Arduino.h>
+#include <Wire.h>
 
 class Seeprom
 {
@@ -34,6 +34,8 @@ class Seeprom
       int readByte(int epaddr);
       int readBuffer(int epaddr, byte * buffer, byte length);
       void dump(int epaddr, unsigned length);
+      void writeInt16(int epaddr, int int16);
+      int readInt16(int epaddr);
    private:
       byte _devaddr;
 };

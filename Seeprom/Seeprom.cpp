@@ -18,9 +18,9 @@
   Released into the public domain.
 */
   
-#include "Arduino.h"
+#include <Arduino.h>
 #include "Seeprom.h"
-#include "Wire.h"
+#include <Wire.h>
 
 Seeprom::Seeprom(byte devaddr)
 {
@@ -107,4 +107,22 @@ void Seeprom::dump(int epaddr, unsigned length)
         }
         Serial.println("|");
     }
+}
+
+void Seeprom::writeInt16(int epaddr, int int16){
+    byte data[2];
+    data[0] = (byte) (int16 & 0xFF);
+    data[1] = (byte) ((int16 >> 8) & 0xFF);
+    writePage(epaddr, data, 2);
+}
+
+int Seeprom::readInt16(int epaddr){
+    byte buffer[2];
+    int val;
+    //Read from the EEPROM
+    readBuffer(0, buffer, 2);
+    
+    val=buffer[1];
+    val=((val << 8) | buffer[0]);
+    return val;
 }
