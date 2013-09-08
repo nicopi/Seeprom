@@ -18,5 +18,7 @@ writePage	KEYWORD2
 readByte	KEYWORD2
 readBuffer	KEYWORD2
 dump	KEYWORD2
-readInt16	KEYWORD2
-writeInt16	KEYWORD2
+readInt	KEYWORD2
+writeInt	KEYWORD2
+clearPage	KEYWORD2
+clearAll	KEYWORD2

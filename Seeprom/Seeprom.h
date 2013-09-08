@@ -28,16 +28,19 @@
 class Seeprom
 {
    public:
-      Seeprom(byte devaddr);
+      Seeprom(byte devaddr, unsigned length);
       void writeByte(int epaddr, byte data);
       void writePage(int epaddr, const byte * data, byte length);
       int readByte(int epaddr);
       int readBuffer(int epaddr, byte * buffer, byte length);
-      void dump(int epaddr, unsigned length);
-      void writeInt16(int epaddr, int int16);
-      int readInt16(int epaddr);
+      void dump(int epaddr);
+      void writeInt(int epaddr, int int16);
+      int readInt(int epaddr);
+      void clearPage(int epaddr);
+      void clearAll();
    private:
       byte _devaddr;
+      unsigned _length;
 };
 
 #endif

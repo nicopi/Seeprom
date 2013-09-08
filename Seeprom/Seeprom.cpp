@@ -22,9 +22,10 @@
 #include "Seeprom.h"
 #include <Wire.h>
 
-Seeprom::Seeprom(byte devaddr)
+Seeprom::Seeprom(byte devaddr, unsigned length)
 {
   _devaddr = devaddr;
+  _length = length;
   Wire.begin();
 }
 
@@ -78,10 +79,10 @@ int Seeprom::readBuffer(int epaddr, byte * buffer, byte length)
     return i;
 }
 
-void Seeprom::dump(int epaddr, unsigned length)
+void Seeprom::dump(int epaddr)
 {
     int startaddr = epaddr & (~0x0f);
-    int stopaddr  = (epaddr + length + 0x0f) & (~0x0f);
+    int stopaddr  = (epaddr + _length + 0x0f) & (~0x0f);
 
     for (int i = startaddr; i < stopaddr; i += 16) {
         byte buffer[16];
@@ -109,20 +110,33 @@ void Seeprom::dump(int epaddr, unsigned length)
     }
 }
 
-void Seeprom::writeInt16(int epaddr, int int16){
+void Seeprom::writeInt(int epaddr, int int16){
     byte data[2];
     data[0] = (byte) (int16 & 0xFF);
     data[1] = (byte) ((int16 >> 8) & 0xFF);
     writePage(epaddr, data, 2);
 }
 
-int Seeprom::readInt16(int epaddr){
+int Seeprom::readInt(int epaddr){
     byte buffer[2];
     int val;
-    //Read from the EEPROM
     readBuffer(0, buffer, 2);
     
     val=buffer[1];
     val=((val << 8) | buffer[0]);
     return val;
+}
+
+void Seeprom::clearPage(int epaddr){
+    byte buffer[16] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+    writePage(epaddr, buffer, 16);
+}
+
+void Seeprom::clearAll(){
+    int startaddr = 0xff;
+    int stopaddr  = (startaddr + _length + 0x0f) & (~0x0f);
+
+    for (int i = startaddr; i < stopaddr; i += 16) {
+        clearPage(i);
+        }
 }
