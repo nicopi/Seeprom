@@ -120,7 +120,7 @@ void Seeprom::writeInt(int epaddr, int int16){
 int Seeprom::readInt(int epaddr){
     byte buffer[2];
     int val;
-    readBuffer(0, buffer, 2);
+    readBuffer(epaddr, buffer, 2);
     
     val=buffer[1];
     val=((val << 8) | buffer[0]);
