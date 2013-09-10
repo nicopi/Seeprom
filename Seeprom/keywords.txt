@@ -19,5 +19,7 @@ readBuffer	KEYWORD2
 dump	KEYWORD2
 readInt	KEYWORD2
 writeInt	KEYWORD2
+writeLong	KEYWORD2
+readLong	KEYWORD2
 clearPage	KEYWORD2
 clearAll	KEYWORD2

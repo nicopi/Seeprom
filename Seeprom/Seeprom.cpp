@@ -140,3 +140,20 @@ void Seeprom::clearAll(){
         clearPage(i);
         }
 }
+
+void Seeprom::writeLong(int epaddr, long long32){
+    byte data[4];
+    data[0]=(byte) (long32 & 0x000000FF);
+    data[1]=(byte) ((long32 & 0x0000FF00) >> 8);
+    data[2]=(byte) ((long32 & 0x00FF0000) >> 16);
+    data[3]=(byte) ((long32 & 0xFF000000) >> 24);
+    writePage(epaddr,data,4);
+}
+
+long Seeprom::readLong(int epaddr){
+    byte buffer[4];
+    long val;
+    readBuffer(epaddr, buffer, 4);
+    val=(((long)buffer[3])<<24) | (((long)buffer[2])<<16) | (((long)buffer[1])<<8) | (((long)buffer[0]));
+    return val;
+}

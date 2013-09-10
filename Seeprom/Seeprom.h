@@ -36,6 +36,8 @@ class Seeprom
       void dump(int epaddr);
       void writeInt(int epaddr, int int16);
       int readInt(int epaddr);
+      void writeLong(int epaddr, long long32);
+      long readLong(int epaddr);
       void clearPage(int epaddr);
       void clearAll();
    private:
