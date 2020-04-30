@@ -2,7 +2,7 @@
 **Seeprom** is an Arduino library for interfacing to small electrically erasable programmable read-only memories (e.g. the 24Cxx series) on the I2C bus.
 
 ***
-### How to connect the EEPROM to the Arduino board
+## How to connect the EEPROM to the Arduino board
 
 The EEPROM must be connected to Arduino by considering the following configuration.
 |EEPROM|Arduino|
